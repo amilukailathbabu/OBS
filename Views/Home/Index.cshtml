@@ -1,0 +1,55 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">anyong haseyo</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div> *@
+
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container text-center">
+    <h1 class="display-4">Admin Dashboard - Bookstore Management</h1>
+    <p class="lead">Manage the operations of the bookstore from this dashboard. Access customer details, orders,
+        inventory, and reviews.</p>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/OBS.styles.css" asp-append-version="true" />
+    <!-- Management Buttons -->
+    <div class="mt-4">
+        @* <a class="btn btn-primary btn-lg m-2">Manage Books</a> *@
+        <a class="btn btn-primary btn-lg m-2" asp-area="" asp-controller="Book" asp-action="Index">Manage Books</a>
+        <a class="btn btn-warning btn-lg m-2" asp-area="" asp-controller="Order" asp-action="Index">Manage Orders</a>
+        <a class="btn btn-info btn-lg m-2" asp-area="" asp-controller="Customer" asp-action="Index">Manage Customers</a>
+        <a class="btn btn-success btn-lg m-2" asp-area="" asp-controller="Review" asp-action="Index">Manage Reviews</a>
+
+    </div>
+
+    <!-- Stats Section (Optional) -->
+    <div class="mt-5">
+        <h3>Quick Stats</h3>
+        <p>Total Books: <strong>100</strong></p>
+        <p>Total Orders: <strong>250</strong></p>
+        <p>Total Customers: <strong>500</strong></p>
+    </div>
+
+    <!-- About the System Section -->
+    <div class="mt-5">
+        <h2>About the System</h2>
+        <p>This internal system allows you to easily manage all aspects of the bookstore, including inventory, customer
+            information, order management, and product reviews.</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-5">
+        <p>&copy; 2024 Bookstore Management System</p>
+    </div>
+</div>
+
+<!-- Bootstrap JS (without Popper.js) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

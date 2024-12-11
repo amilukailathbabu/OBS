@@ -1,0 +1,155 @@
+@* @model OBS.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Order</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress" class="control-label"></label>
+                <input asp-for="ShippingAddress" class="form-control" />
+                <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <input asp-for="OrderStatus" class="form-control" />
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@
+
+
+
+
+@model OBS.Models.Order
+
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h1>Create Order</h1>
+
+<h4>Order Details</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <!-- Order Information -->
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label"></label>
+                <input asp-for="OrderDate" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShippingAddress" class="control-label"></label>
+                <input asp-for="ShippingAddress" class="form-control" />
+                <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderStatus" class="control-label"></label>
+                <input asp-for="OrderStatus" class="form-control" />
+                <span asp-validation-for="OrderStatus" class="text-danger"></span>
+            </div>
+
+            <!-- Order Items -->
+            <h4>Order Items</h4>
+            <div class="order-items-container">
+                <!-- Order Item 1 -->
+                <div class="form-group">
+                    <label for="BookId_0">Book</label>
+                    <select class="form-control" name="OrderItems[0].BookId" id="BookId_0" asp-items="ViewBag.Books">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="Quantity_0">Quantity</label>
+                    <input type="number" class="form-control" name="OrderItems[0].Quantity" id="Quantity_0" value="1" />
+                </div>
+                <div class="form-group">
+                    <label for="PriceAtPurchase_0">Price at Purchase</label>
+                    <input type="number" class="form-control" name="OrderItems[0].PriceAtPurchase" id="PriceAtPurchase_0" value="0" />
+                </div>
+
+                <!-- Add More Items Button -->
+                <button type="button" class="btn btn-secondary" onclick="addOrderItem()">Add More Items</button>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create Order" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        let itemCount = 1;
+
+        function addOrderItem() {
+            const container = document.querySelector(".order-items-container");
+            
+            // Clone the first item group and update the names and ids
+            const newItem = container.querySelector(".form-group").parentElement.cloneNode(true);
+
+            // Update names and IDs for each field dynamically
+            newItem.querySelector("select").name = `OrderItems[${itemCount}].BookId`;
+            newItem.querySelector("input[name='OrderItems[0].Quantity']").name = `OrderItems[${itemCount}].Quantity`;
+            newItem.querySelector("input[name='OrderItems[0].PriceAtPurchase']").name = `OrderItems[${itemCount}].PriceAtPurchase`;
+
+            // Append the cloned item to the container
+            container.appendChild(newItem);
+            
+            // Increment item count for next item
+            itemCount++;
+        }
+    </script>
+}
